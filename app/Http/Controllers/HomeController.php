@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Thooth;
 use Auth;
 use App\Clinic;
+use App\Doctor;
 
 
 class HomeController extends Controller
@@ -53,10 +54,10 @@ class HomeController extends Controller
         $theeth_change=Auth::user()->register->registerable->change_theeth;
 
 
-
+        $clinics = Clinic::all();
 
         $menu='records';
-        return view('records',['menu'=>$menu,'chaps'=>$chaps,'theeth_change'=>$theeth_change]);
+        return view('records',['menu'=>$menu,'chaps'=>$chaps,'theeth_change'=>$theeth_change,'clinics'=>$clinics]);
     }
     public function recommendations(){
         $menu='recommendations';
@@ -68,14 +69,15 @@ class HomeController extends Controller
     }
     public function clinics(){
 
-        $clinics=array();
         $clinics=Clinic::all();
 
         $menu='clinics';
         return view('clinics',['menu'=>$menu,'clinics'=>$clinics]);
     }
     public function doctors(){
+        $doctors = Doctor::all();
+
         $menu='doctors';
-        return view('doctors',['menu'=>$menu]);
+        return view('doctors',['menu'=>$menu,'doctors'=>$doctors]);
     }
 }

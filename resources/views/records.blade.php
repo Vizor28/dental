@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <div class="theeth_block mTop20">
+    <div class="title">Выберете зуб который у вас болит:</div>
+
+    <div class="theeth_block mTop20" id="records_theeth">
 
         <!-- <pre></pre>-->
         @if (isset($chaps) && !empty($chaps))
@@ -58,6 +60,50 @@
         @endforeach
 
     @endif
+
+    <form action="{{ url('/cabinet/records') }}" method="POST" role="form">
+
+        @if(isset($clinics) && !empty($clinics))
+
+        <div class="form-group">
+            <label for="clinic_id">Clinic</label>
+            <select name="clinic_id" id="clinic_id">
+                @foreach($clinics as $key=>$clinic)
+                    <option value="{{ $clinic->id }}" @if (!$key) selected @endif >{{ $clinic->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="doctor_id">Doctor</label>
+
+            <select name="doctor_id" id="doctor_id">
+                @if(empty($clinics[0]->doctors->toArray()))
+                    <option>Нету докторов</option>
+                @else
+                    @foreach($clinics[0]->doctors->toArray() as $key=>$doctor)
+                        <option value="{{ $doctor->id }}" @if (!$key) selected @endif >{{ $doctor->name }}</option>
+                    @endforeach
+
+                @endif
+            </select>
+        </div>
+
+        @endif
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" />
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="message" id="message"></textarea>
+        </div>
+
+        <input type="hidden" name="thooth_id" />
+        <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
 
 
 @endsection
