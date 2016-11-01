@@ -1,0 +1,46 @@
+.mTop10{margin-top: 10px;}
+.mTop20{margin-top: 20px;}
+.mTop30{margin-top: 30px;}
+.mTop40{margin-top: 40px;}
+.mTop50{margin-top: 50px;}
+.mTop60{margin-top: 60px;}
+.mTop70{margin-top: 70px;}
+.mTop80{margin-top: 80px;}
+
+
+#content{
+    background: #ffffff;
+    border-radius: 5px;
+}
+.theeth_block{
+
+}
+.theeth_block table{
+    width:100%;
+}
+.thooth_image{
+    text-align: center;
+}
+.thooth_image svg{
+    max-width: 40px;
+    max-height: 70px;
+    width: 100%;
+    height: auto;
+    cursor:pointer;
+}
+.thooth_number{
+    text-align: center;
+}
+
+#theeth_change{
+
+}
+#theeth_change .change_2{
+    background: rgb(0, 204, 0);
+}
+#theeth_change .change_3{
+    background: rgb(237, 117, 36);
+}
+#theeth_change .change_4{
+    background: rgba(0, 0, 0, 0.2);
+}
