@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     //
+    public $timestamps=false;
 
     public function register(){
         return $this->morphOne('App\Register', 'registerable');
