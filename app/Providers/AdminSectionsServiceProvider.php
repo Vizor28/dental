@@ -18,6 +18,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         \App\User::class => 'App\Http\Admin\User',
         \App\Clinic::class => 'App\Http\Admin\Clinic',
         \App\Users_theeth::class => 'App\Http\Admin\Users_theeth',
+        \App\Direction::class => 'App\Http\Admin\Direction',
     ];
 
     /**

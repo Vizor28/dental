@@ -11,7 +11,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 
-class Doctor extends Section
+class Direction extends Section
 {
     /**
      * @var bool
@@ -37,13 +37,10 @@ class Doctor extends Section
         return AdminDisplay::table()
             ->setHtmlAttribute('class', 'table-primary')
             ->setColumns(
-                AdminColumn::text('id', '#')->setWidth('30px'),
-                AdminColumn::link('name', 'ФИО'),
-                AdminColumn::email('email', 'Email'),
-                AdminColumn::text('experience', 'Стаж'),
-                AdminColumn::lists('clinics.name', 'Клиники'),
-                AdminColumn::lists('directions.name', 'Направление')
+                AdminColumn::link('id', '#')->setWidth('30px'),
+                AdminColumn::text('name', 'Название')
             )->paginate(20);
+
     }
 
     /**
@@ -55,14 +52,7 @@ class Doctor extends Section
     {
         // todo: remove if unused
         return AdminForm::panel()->addBody([
-            AdminFormElement::text('name', 'ФИО')->required()->unique(),
-            AdminFormElement::text('email', 'Email')->required()->unique(),
-            AdminFormElement::text('experience', 'Стаж'),
-            AdminFormElement::multiselect('clinics', 'Клиники')
-                ->setModelForOptions('App\Clinic')->setDisplay('name'),
-            AdminFormElement::multiselect('directions', 'Направление')
-                ->setModelForOptions('App\Direction')->setDisplay('name'),
-            AdminFormElement::wysiwyg('text', 'Текст')
+            AdminFormElement::text('name', 'Название')->required(),
         ]);
     }
 

@@ -12,5 +12,7 @@ class Doctor extends Model
     public function clinics(){
         return $this->belongsToMany('App\Clinic','doctors_clinics');
     }
-
+    public function directions(){
+        return $this->belongsToMany('App\Direction','doctors_directions');
+    }
 }

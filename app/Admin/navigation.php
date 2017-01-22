@@ -28,15 +28,21 @@ return [
         'model' => \App\Doctor::class,
     ],
     [
-        'title' => 'Клиники',
+        'title' => 'Направление докторов',
         'icon' => 'fa fa-newspaper-o',
         'priority'=>'5',
+        'model' => \App\Direction::class,
+    ],
+    [
+        'title' => 'Клиники',
+        'icon' => 'fa fa-newspaper-o',
+        'priority'=>'6',
         'model' => \App\Clinic::class,
     ],
     [
         'title' => 'Изменение зубов',
         'icon' => 'fa fa-newspaper-o',
-        'priority'=>'6',
+        'priority'=>'7',
         'model' => \App\Users_theeth::class,
     ],
 ];

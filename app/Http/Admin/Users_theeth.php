@@ -10,6 +10,8 @@ use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use AdminDisplayFilter;
+use AdminColumnFilter;
 
 class Users_theeth extends Section
 {
@@ -28,26 +30,52 @@ class Users_theeth extends Section
      */
     protected $alias;
 
-    public $timestamps = false;
 
     /**
      * @return DisplayInterface
      */
     public function onDisplay()
     {
+
         // todo: remove if unused
-        return AdminDisplay::table()
+        $display=AdminDisplay::datatables()
+            /*->setActions([
+                 AdminColumn::action('new_user', 'Зарегестрировать')->setIcon('fa fa-share')->setAction(url('/admin/users_theeths/'))->setMethod('get')
+        ])*/
+            ->setFilters(
+                AdminDisplayFilter::field('status_id')->setAlias('status')->setTitle('status ID [:value]')
+            )
             ->setHtmlAttribute('class', 'table-primary')
             ->setColumns(
                 AdminColumn::link('id', '#')->setWidth('30px'),
                 AdminColumn::datetime('date', 'Дата')->setFormat('d.m.Y'),
-                AdminColumn::text('text', 'Описание'),
-                AdminColumn::text('thooth.name', 'Зуб'),
+                AdminColumn::text('thooth.id', 'Зуб'),
                 AdminColumn::text('status.name', 'Статус'),
-                AdminColumn::relatedLink('clinic.name', 'Клиника'),
                 AdminColumn::relatedLink('doctor.name', 'Доктор'),
                 AdminColumn::relatedLink('patient.fio', 'Пациент')
+                //AdminColumn::checkbox()
             )->paginate(20);
+
+        $display->getColumnFilters()->push(null)
+            ->push(
+                AdminColumnFilter::range()->setFrom(
+                    AdminColumnFilter::date()->setPlaceholder('From Date')->setFormat('d.m.Y')
+                )->setTo(
+                    AdminColumnFilter::date()->setPlaceholder('To Date')->setFormat('d.m.Y')
+                )
+            )
+            ->push(
+                AdminColumnFilter::text()
+            )
+            ->push(
+                AdminColumnFilter::select()->setPlaceholder('Статус')->setModel(new \App\Status)->setDisplay('name')
+            )->push(
+                AdminColumnFilter::select()->setPlaceholder('Доктор')->setModel(new \App\Doctor)->setDisplay('name')
+            )->push(
+                AdminColumnFilter::select()->setPlaceholder('Пациент')->setModel(new \App\Patient)->setDisplay('fio')
+            )->push(null);
+
+        return $display;
     }
 
     /**
